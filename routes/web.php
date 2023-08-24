@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
+use App\Http\Controllers\Main\IndexController;
+use App\Http\Controllers\Admin\Main\AdminController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +17,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
+
+
+//Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
+//    Route::get('/', AdminController::class);
+//});
+
+Route::name('main.')->group(function() {
     Route::get('/', IndexController::class);
 });
 
-
+Route::prefix('admin')->group(function (){
+    Route::name('main')->group(function() {
+        Route::get('/', AdminController::class);
+    });
+});
 
 Auth::routes();
+
+
 
