@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\Main\IndexController;
 use App\Http\Controllers\Admin\Main\AdminController;
+use App\Http\Controllers\Admin\Category\CategoryController;
 
 
 /*
@@ -31,7 +32,44 @@ Route::prefix('admin')->group(function (){
     Route::name('main')->group(function() {
         Route::get('/', AdminController::class);
     });
+    Route::name('main')->group(function() {
+        Route::get('/', AdminController::class);
+    });
+
+ // РАБОТАЕТ
+//    Route::prefix('categories')->group(function () {
+//        Route::name('category')->group(function () {
+//            Route::get('/', function (){
+//                return 2222222;
+//            });
+//        });
+//    });
+
+    // РАБОТАЕТ
+
+//    Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
+//        Route::get('/', CategoryController::class);
+//    });
+
+        Route::prefix('categories')->group(function () {
+        Route::name('category')->group(function () {
+            Route::get('/', CategoryController::class);
+            });
+        });
+
+
 });
+
+
+
+
+
+
+
+
+
+
+
 
 Auth::routes();
 
