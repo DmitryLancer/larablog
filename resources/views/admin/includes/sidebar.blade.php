@@ -1,4 +1,5 @@
 <!-- Main Sidebar Container -->
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
 
@@ -9,7 +10,7 @@
                  with font-awesome or any other icon font library -->
 
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.category.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-th-list"></i>
                     <p>
                         Категории

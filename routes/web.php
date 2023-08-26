@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Category\CreateController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\Main\IndexController;
@@ -50,14 +51,30 @@ Route::prefix('admin')->group(function (){
 //    Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
 //        Route::get('/', CategoryController::class);
 //    });
+   // ЭТО РАБОТАЕТ ВНИЗУ !!!
+//        Route::prefix('categories')->group(function () {
+//        Route::name('category')->group(function () {
+//            Route::get('/', CategoryController::class)->name('category.index');
+//            });
+//        });
 
-        Route::prefix('categories')->group(function () {
-        Route::name('category')->group(function () {
-            Route::get('/', CategoryController::class);
-            });
+
+//    Route::prefix('categories')->group(function () {
+//        Route::name('category')->group(function () {
+//            Route::get('/', [App\Http\Controllers\Admin\Category\CategoryController::class])->name('category.index');
+//        });
+//    });
+
+    Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
+        Route::group(['namespace' => 'Main'], function () {
+            Route::get('/', [CategoryController::class])->name('admin.index');
         });
 
-
+        Route::group(['namespace' => 'Category', 'prefix' => 'categories'], function () {
+            Route::get('/', CategoryController::class)->name('admin.category.index');
+            Route::get('/create', CreateController::class)->name('admin.category.create');
+        });
+    });
 });
 
 
