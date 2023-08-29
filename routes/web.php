@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\Category\StoreController;
 use App\Http\Controllers\Admin\Category\UpdateController;
 use App\Http\Controllers\Admin\Main\IndexController;
 use App\Http\Controllers\Admin\Main\AdminController;
-use App\Http\Controllers\Admin\Category\CategoryController;
+use App\Http\Controllers\Admin\Category\PostController;
 use App\Http\Controllers\Admin\Tag\TagController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
@@ -94,7 +94,17 @@ Route::name('main.')->group(function() {
 
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
     Route::group(['namespace' => 'Main'], function () {
-        Route::get('/', [CategoryController::class])->name('admin.index');
+        Route::get('/', [PostController::class])->name('admin.index');
+    });
+
+    Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
+        Route::get('/', Controllers\Admin\Post\PostController::class)->name('admin.post.index');
+        Route::get('/create', Controllers\Admin\Post\CreateController::class)->name('admin.post.create');
+        Route::post('/', Controllers\Admin\Post\StoreController::class)->name('admin.post.store');
+        Route::get('/{post}', Controllers\Admin\Post\ShowController::class)->name('admin.post.show');
+        Route::get('/{post}/edit', Controllers\Admin\Post\EditController::class)->name('admin.post.edit');
+        Route::patch('/{post}', Controllers\Admin\Post\UpdateController::class)->name('admin.post.update');
+        Route::delete('/{post}', Controllers\Admin\Post\DeleteController::class)->name('admin.post.delete');
     });
 
     Route::group(['namespace' => 'Category', 'prefix' => 'category'], function () {
