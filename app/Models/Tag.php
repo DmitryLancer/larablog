@@ -14,7 +14,4 @@ class Tag extends Model
     protected $table = 'tags';
     protected $guarded = false;
 
-    public static function firstOrcreate(mixed $data)
-    {
-    }
 }
