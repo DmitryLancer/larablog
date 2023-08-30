@@ -31,13 +31,19 @@
                         <form action="{{ route('admin.post.store') }}" method="POST">
                             @csrf
                             <div class="form-group w-25">
-                                <input type="text" class="form-control" name="title" placeholder="Название поста">
+                                <input type="text" class="form-control" name="title" placeholder="Название поста"
+                                value="{{ old('title') }}">
                                 @error('title')
                                 <div class="text-danger">Это поле нужно заполнить!</div>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <textarea id="summernote" name="content"></textarea>
+                                <textarea id="summernote" name="content">
+                                    {{ old('content') }}
+                                </textarea>
+                                @error('content')
+                                <div class="text-danger">Это поле нужно заполнить!</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Добавить">
