@@ -56,6 +56,9 @@
                                         <span class="input-group-text">Загрузить</span>
                                     </div>
                                 </div>
+                                @error('preview_image')
+                                <div class="text-danger">Это поле нужно заполнить!</div>
+                                @enderror
                             </div>
                             <div class="form-group w-50">
                                 <label for="exampleInputFile">Добавить главное изображение</label>
@@ -68,6 +71,19 @@
                                         <span class="input-group-text">Загрузить</span>
                                     </div>
                                 </div>
+                                @error('main_image')
+                                <div class="text-danger">Это поле нужно заполнить!</div>
+                                @enderror
+                            </div>
+                            <div class="form-group w-50">
+                                <label>Выберите категорию</label>
+                                <select name="category_id" class="form-control">
+                                    @foreach($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                    {{ $category->id == old('category_id') ? ' selected' : ''}}
+                                    >{{ $category->title }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Добавить">
