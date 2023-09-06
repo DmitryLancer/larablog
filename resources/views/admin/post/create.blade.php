@@ -34,7 +34,7 @@
                                 <input type="text" class="form-control" name="title" placeholder="Название поста"
                                 value="{{ old('title') }}">
                                 @error('title')
-                                <div class="text-danger">Это поле нужно заполнить!</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
@@ -42,7 +42,7 @@
                                     {{ old('content') }}
                                 </textarea>
                                 @error('content')
-                                <div class="text-danger">Это поле нужно заполнить!</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group w-50">
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 @error('preview_image')
-                                <div class="text-danger">Это поле нужно заполнить!</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group w-50">
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 @error('main_image')
-                                <div class="text-danger">Это поле нужно заполнить!</div>
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group w-50">
@@ -85,6 +85,10 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @error('category_id')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                            </div>
                             <div class="form-group">
                                 <label>Тэги</label>
                                 <select class="select2" name="tag_ids[]" multiple="multiple" data-placeholder="Выберите теги" style="width: 100%;">
@@ -93,6 +97,9 @@
                                     @endforeach
 
                                 </select>
+                                @error('tag_ids')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" value="Добавить">
