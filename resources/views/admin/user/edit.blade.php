@@ -32,9 +32,15 @@
                             @csrf
                             @method('PATCH')
                             <div class="form-group">
-                                <input type="text" class="form-control" name="title" placeholder="Имя пользователя"
+                                <input type="text" class="form-control" name="name" placeholder="Имя пользователя"
                                        value="{{ $user->name }}">
-                                @error('title')
+                                @error('name')
+                                <div class="text-danger">Это поле нужно заполнить!</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input type="text" value="{{ $user->email }}" class="form-control" name="email" placeholder="Ваша почта">
+                                @error('email')
                                 <div class="text-danger">Это поле нужно заполнить!</div>
                                 @enderror
                             </div>
