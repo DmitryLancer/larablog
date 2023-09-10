@@ -32,18 +32,21 @@
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
+        <div class="col-12 d-flex justify-content-between">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <input class="btn btn-outline-primary" type="submit" value="Выйти">
+                </form>
             </li>
         </ul>
-
+        </div>
     </nav>
     <!-- /.navbar -->
 
