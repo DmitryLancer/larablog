@@ -44,6 +44,23 @@
                                 <div class="text-danger">Это поле нужно заполнить!</div>
                                 @enderror
                             </div>
+                             <div class="form-group w-50">
+                            <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                </div>
+                            <div class="form-group w-50">
+                                <label>Выберите роль</label>
+                                <select name="role" class="form-control">
+                                    @foreach($roles as $id => $role)
+                                        <option value="{{ $id }}"
+                                            {{ $id == $user->role ? ' selected' : ''}}
+                                        >{{ $role }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('role')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+
                             <input type="submit" class="btn btn-primary" value="Обновить">
                         </form>
                     </div>
