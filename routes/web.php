@@ -83,19 +83,26 @@ use App\Http\Controllers;
 
 
 
+//
+//Route::name('main.')->group(function() {
+//    Route::get('/', IndexController::class);
+//});
 
-Route::name('main.')->group(function() {
-    Route::get('/', IndexController::class);
+
+
+Route::group(['namespace' => ''], function () {
+    Route::get('/', Controllers\Admin\Main\IndexController::class)->name('main.index');
 });
-
 
 
 
 
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
     Route::group(['namespace' => 'Main'], function () {
-        Route::get('/', [IndexController::class])->name('admin.index');
+        Route::get('/', AdminController::class)->name('admin.main.index'); // убрать admin. если чо
     });
+
+
 
     Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
         Route::get('/', Controllers\Admin\Post\PostController::class)->name('admin.post.index');
@@ -142,13 +149,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
 
 
 
-Route::prefix('admin')->group(function (){
-    Route::name('main')->group(function() {
-        Route::get('/', AdminController::class);
-    });
-});
 
-
+//Route::prefix('admin')->group(function (){
+//    Route::name('main.')->group(function() {
+//        Route::get('/', AdminController::class);
+//    });
+//});
 
 
 
