@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Main\IndexController;
 use App\Http\Controllers\Admin\Main\AdminController;
 use App\Http\Controllers\Admin\Category\PostController;
 use App\Http\Controllers\Admin\Tag\TagController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 
@@ -94,60 +95,70 @@ Route::group(['namespace' => ''], function () {
     Route::get('/', Controllers\Admin\Main\IndexController::class)->name('main.index');
 });
 
-
-
-
-Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
-    Route::group(['namespace' => 'Main'], function () {
-        Route::get('/', AdminController::class)->name('admin.main.index'); // убрать admin. если чо
+Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth', 'verified']], function () {
+    Route::group(['namespace' => 'Main', 'prefix' => 'main'], function () {
+        Route::get('/', Controllers\Personal\Main\IndexController::class)->name('personal.main.index');; // убрать admin. если чо
     });
 
-
-
-    Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
-        Route::get('/', Controllers\Admin\Post\PostController::class)->name('admin.post.index');
-        Route::get('/create', Controllers\Admin\Post\CreateController::class)->name('admin.post.create');
-        Route::post('/', Controllers\Admin\Post\StoreController::class)->name('admin.post.store');
-        Route::get('/{post}', Controllers\Admin\Post\ShowController::class)->name('admin.post.show');
-        Route::get('/{post}/edit', Controllers\Admin\Post\EditController::class)->name('admin.post.edit');
-        Route::patch('/{post}', Controllers\Admin\Post\UpdateController::class)->name('admin.post.update');
-        Route::delete('/{post}', Controllers\Admin\Post\DeleteController::class)->name('admin.post.delete');
+    Route::group(['namespace' => 'Liked', 'prefix' => 'likeds'], function () {
+        Route::get('/', Controllers\Personal\Liked\IndexController::class)->name('personal.liked.index'); // убрать admin. если чо
     });
-
-    Route::group(['namespace' => 'Category', 'prefix' => 'category'], function () {
-        Route::get('/', Controllers\Admin\Category\CategoryController::class)->name('admin.category.index');
-        Route::get('/create', Controllers\Admin\Category\CreateController::class)->name('admin.category.create');
-        Route::post('/', Controllers\Admin\Category\StoreController::class)->name('admin.category.store');
-        Route::get('/{category}', Controllers\Admin\Category\ShowController::class)->name('admin.category.show');
-        Route::get('/{category}/edit', Controllers\Admin\Category\EditController::class)->name('admin.category.edit');
-        Route::patch('/{category}', Controllers\Admin\Category\UpdateController::class)->name('admin.category.update');
-        Route::delete('/{category}', Controllers\Admin\Category\DeleteController::class)->name('admin.category.delete');
-    });
-
-    Route::group(['namespace' => 'Tag', 'prefix' => 'tags'], function () {
-        Route::get('/', Controllers\Admin\Tag\TagController::class)->name('admin.tag.index');
-        Route::get('/create', Controllers\Admin\Tag\CreateController::class)->name('admin.tag.create');
-        Route::post('/', Controllers\Admin\Tag\StoreController::class)->name('admin.tag.store');
-        Route::get('/{tag}', Controllers\Admin\Tag\ShowController::class)->name('admin.tag.show');
-        Route::get('/{tag}/edit', Controllers\Admin\Tag\EditController::class)->name('admin.tag.edit');
-        Route::patch('/{tag}', Controllers\Admin\Tag\UpdateController::class)->name('admin.tag.update');
-        Route::delete('/{tag}', Controllers\Admin\Tag\DeleteController::class)->name('admin.tag.delete');
-    });
-
-    Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
-        Route::get('/', Controllers\Admin\User\UserController::class)->name('admin.user.index');
-        Route::get('/create', Controllers\Admin\User\CreateController::class)->name('admin.user.create');
-        Route::post('/', Controllers\Admin\User\StoreController::class)->name('admin.user.store');
-        Route::get('/{user}', Controllers\Admin\User\ShowController::class)->name('admin.user.show');
-        Route::get('/{user}/edit', Controllers\Admin\User\EditController::class)->name('admin.user.edit');
-        Route::patch('/{user}', Controllers\Admin\User\UpdateController::class)->name('admin.user.update');
-        Route::delete('/{user}', Controllers\Admin\User\DeleteController::class)->name('admin.user.delete');
+    Route::group(['namespace' => 'Comment', 'prefix' => 'comments'], function () {
+        Route::get('/', Controllers\Personal\Comment\IndexController::class)->name('personal.comment.index'); // убрать admin. если чо
     });
 
 
 });
 
 
+    Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
+        Route::group(['namespace' => 'Main'], function () {
+            Route::get('/', AdminController::class)->name('admin.main.index'); // убрать admin. если чо
+        });
+
+
+        Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
+            Route::get('/', Controllers\Admin\Post\PostController::class)->name('admin.post.index');
+            Route::get('/create', Controllers\Admin\Post\CreateController::class)->name('admin.post.create');
+            Route::post('/', Controllers\Admin\Post\StoreController::class)->name('admin.post.store');
+            Route::get('/{post}', Controllers\Admin\Post\ShowController::class)->name('admin.post.show');
+            Route::get('/{post}/edit', Controllers\Admin\Post\EditController::class)->name('admin.post.edit');
+            Route::patch('/{post}', Controllers\Admin\Post\UpdateController::class)->name('admin.post.update');
+            Route::delete('/{post}', Controllers\Admin\Post\DeleteController::class)->name('admin.post.delete');
+        });
+
+        Route::group(['namespace' => 'Category', 'prefix' => 'category'], function () {
+            Route::get('/', Controllers\Admin\Category\CategoryController::class)->name('admin.category.index');
+            Route::get('/create', Controllers\Admin\Category\CreateController::class)->name('admin.category.create');
+            Route::post('/', Controllers\Admin\Category\StoreController::class)->name('admin.category.store');
+            Route::get('/{category}', Controllers\Admin\Category\ShowController::class)->name('admin.category.show');
+            Route::get('/{category}/edit', Controllers\Admin\Category\EditController::class)->name('admin.category.edit');
+            Route::patch('/{category}', Controllers\Admin\Category\UpdateController::class)->name('admin.category.update');
+            Route::delete('/{category}', Controllers\Admin\Category\DeleteController::class)->name('admin.category.delete');
+        });
+
+        Route::group(['namespace' => 'Tag', 'prefix' => 'tags'], function () {
+            Route::get('/', Controllers\Admin\Tag\TagController::class)->name('admin.tag.index');
+            Route::get('/create', Controllers\Admin\Tag\CreateController::class)->name('admin.tag.create');
+            Route::post('/', Controllers\Admin\Tag\StoreController::class)->name('admin.tag.store');
+            Route::get('/{tag}', Controllers\Admin\Tag\ShowController::class)->name('admin.tag.show');
+            Route::get('/{tag}/edit', Controllers\Admin\Tag\EditController::class)->name('admin.tag.edit');
+            Route::patch('/{tag}', Controllers\Admin\Tag\UpdateController::class)->name('admin.tag.update');
+            Route::delete('/{tag}', Controllers\Admin\Tag\DeleteController::class)->name('admin.tag.delete');
+        });
+
+        Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
+            Route::get('/', Controllers\Admin\User\UserController::class)->name('admin.user.index');
+            Route::get('/create', Controllers\Admin\User\CreateController::class)->name('admin.user.create');
+            Route::post('/', Controllers\Admin\User\StoreController::class)->name('admin.user.store');
+            Route::get('/{user}', Controllers\Admin\User\ShowController::class)->name('admin.user.show');
+            Route::get('/{user}/edit', Controllers\Admin\User\EditController::class)->name('admin.user.edit');
+            Route::patch('/{user}', Controllers\Admin\User\UpdateController::class)->name('admin.user.update');
+            Route::delete('/{user}', Controllers\Admin\User\DeleteController::class)->name('admin.user.delete');
+        });
+
+
+    });
 
 
 //Route::prefix('admin')->group(function (){
@@ -157,15 +168,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
 //});
 
 
-
-
-
-
 //    Route::name('main')->group(function() {
 //        Route::get('/', AdminController::class);
 //    });
 
- // РАБОТАЕТ
+    // РАБОТАЕТ
 //    Route::prefix('category')->group(function () {
 //        Route::name('category')->group(function () {
 //            Route::get('/', function (){
@@ -179,7 +186,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
 //    Route::group(['namespace' => 'Category', 'prefix' => 'category'], function () {
 //        Route::get('/', TagController::class);
 //    });
-   // ЭТО РАБОТАЕТ ВНИЗУ !!!
+    // ЭТО РАБОТАЕТ ВНИЗУ !!!
 //        Route::prefix('category')->group(function () {
 //        Route::name('category')->group(function () {
 //            Route::get('/', TagController::class)->name('category.index');
@@ -194,20 +201,6 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 
 //    });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Auth::routes(['verify' => true]);
-
+    Auth::routes(['verify' => true]);
 
 
