@@ -100,8 +100,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'perso
         Route::get('/', Controllers\Personal\Main\IndexController::class)->name('personal.main.index');; // убрать admin. если чо
     });
 
-    Route::group(['namespace' => 'Liked', 'prefix' => 'likeds'], function () {
-        Route::get('/', Controllers\Personal\Liked\IndexController::class)->name('personal.liked.index'); // убрать admin. если чо
+    Route::group(['namespace' => 'Liked', 'prefix' => 'liked'], function () {
+        Route::get('/', Controllers\Personal\Liked\IndexController::class)->name('personal.liked.index');
+        Route::delete('/{post}', Controllers\Personal\Liked\DeleteController::class)->name('personal.liked.delete');// убрать admin. если чо
     });
     Route::group(['namespace' => 'Comment', 'prefix' => 'comments'], function () {
         Route::get('/', Controllers\Personal\Comment\IndexController::class)->name('personal.comment.index'); // убрать admin. если чо
