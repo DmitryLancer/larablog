@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\Category\StoreController;
 use App\Http\Controllers\Admin\Category\UpdateController;
 use App\Http\Controllers\Admin\Main\IndexController;
 use App\Http\Controllers\Admin\Main\AdminController;
-use App\Http\Controllers\Admin\Category\PostController;
+use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Tag\TagController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -48,7 +48,7 @@ use App\Http\Controllers;
 //        Route::get('/', [TagController::class])->name('admin.index');
 //    });
 //
-//    Route::group(['namespace' => 'App\Http\Controllers\Category', 'prefix' => 'category'], function () {
+//    Route::group(['namespace' => 'App\Http\Controllers\Comment', 'prefix' => 'category'], function () {
 //        Route::get('/', TagController::class)->name('admin.category.index');
 //        Route::get('/create', CreateController::class)->name('admin.category.create');
 //        Route::post('/', StoreController::class)->name('admin.category.store');
@@ -106,10 +106,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'perso
     });
     Route::group(['namespace' => 'Comment', 'prefix' => 'comments'], function () {
         Route::get('/', Controllers\Personal\Comment\IndexController::class)->name('personal.comment.index'); // убрать admin. если чо
+        Route::get('/{comment}/edit', Controllers\Personal\Comment\EditController::class)->name('personal.comment.edit'); // убрать admin. если чо
+        Route::patch('/{comment}', Controllers\Personal\Comment\UpdateController::class)->name('personal.comment.update'); // убрать admin. если чо
+        Route::delete('/{comment}', Controllers\Personal\Comment\DeleteController::class)->name('personal.comment.delete'); // убрать admin. если чо
     });
 
 
 });
+
+
 
 
     Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
@@ -184,7 +189,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'perso
 
     // РАБОТАЕТ
 
-//    Route::group(['namespace' => 'Category', 'prefix' => 'category'], function () {
+//    Route::group(['namespace' => 'Comment', 'prefix' => 'category'], function () {
 //        Route::get('/', TagController::class);
 //    });
     // ЭТО РАБОТАЕТ ВНИЗУ !!!
@@ -197,7 +202,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'perso
 
 //    Route::prefix('category')->group(function () {
 //        Route::name('category')->group(function () {
-//            Route::get('/', [App\Http\Controllers\Admin\Category\TagController::class])->name('category.index');
+//            Route::get('/', [App\Http\Controllers\Admin\Comment\TagController::class])->name('category.index');
 //        });
 //    });
 
