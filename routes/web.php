@@ -98,6 +98,10 @@ Route::group(['namespace' => ''], function () {
 Route::group(['namespace' => 'App\Http\Controllers\Post', 'prefix' => 'posts'], function () {
     Route::get('/',  Controllers\Post\IndexController::class)->name('post.index');
     Route::get('/{post}',  Controllers\Post\ShowController::class)->name('post.show');
+
+    Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comments'], function() {
+        Route::post('/', Controllers\Post\Comment\StoreController::class)->name('post.comment.store');
+    });
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\Personal', 'prefix' => 'personal', 'middleware' => ['auth', 'verified']], function () {
