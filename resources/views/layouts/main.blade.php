@@ -28,8 +28,9 @@
                     </li>
                     <li class="nav-item">
                         @auth()
+                            <a class="nav-link" href="{{ route('personal.main.index') }}">Личный кабинет</a>
                         @endauth
-                        <a class="nav-link" href="{{ route('personal.main.index') }}">Личный кабинет</a>
+
 
                         @guest()
                                 <a class="nav-link" href="{{ route('personal.main.index') }}">Войти</a>
