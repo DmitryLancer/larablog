@@ -52,7 +52,7 @@
                             <div class="col-md-4" data-aos="fade-right" data-aos-delay="100">
                                 <img src="{{ asset('storage/' . $relatedPost->main_image) }}" alt="related post" class="post-thumbnail">
                                 <p class="post-category">{{ $relatedPost->category->title }}</p>
-                                <a href="{{ route('post.show', $relatedPost->id) }}"><h5 class="post-title">{{ $post->title }}</h5></a>
+                                <a href="{{ route('post.show', $relatedPost->id) }}"><h5 class="post-title">{{ $relatedPost->title}}</h5></a>
                             </div>
                             @endforeach
                         </div>
