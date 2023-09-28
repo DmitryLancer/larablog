@@ -7,11 +7,11 @@
         <h1 class="edica-page-title" data-aos="fade-up">Категории</h1>
         <section class="featured-posts-section">
             <ul>
+                @foreach($categories as $category)
                 <li>
-                    @foreach($categories as $category)
                     <a href="{{ route('category.post.index', $category->id) }}">{{ $category->title }}</a>
-                    @endforeach
                 </li>
+                @endforeach
             </ul>
         </section>
 
