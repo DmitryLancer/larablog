@@ -4,15 +4,20 @@
 @section('content')
     <main class="blog-post">
         <div class="container">
+
             <h1 class="edica-page-title" data-aos="fade-up">{{ $post->title }}</h1>
             <p class="edica-blog-post-meta" data-aos="fade-up" data-aos-delay="200">• {{ $date->translatedFormat('d F Y') }} • {{ $date->format('H:i') }} • {{ $post->comments->count() }} Коментария</p>
+            <div class="col-2 d-flex pb-4">
+                <a href="{{ route('post.index') }}" class="btn btn-block btn-primary">Вернуться к постам</a>
+            </div>
             <section class="blog-post-featured-img" data-aos="fade-up" data-aos-delay="300">
                 <img src="{{ asset('storage/' . $post->main_image) }}" alt="featured image" class="w-100">
             </section>
+
             <section class="post-content">
                 <div class="row">
                     <div class="col-lg-9 mx-auto">
-                        {{ $post->content }}
+                           {{ $post->content }}
                     </div>
                 </div>
             </section>
